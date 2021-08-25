@@ -137,7 +137,7 @@ def project(
 
     # Load CLIP
     if use_clip:
-        model, transform = clip.load("ViT-B/32", device=device)
+        model, transform = clip.load("ViT-B/16", device=device)
 
     # Features for target image.
     if target_image is not None:
@@ -341,6 +341,7 @@ def run_projection(
         target_image = torch.tensor(target_uint8.transpose([2, 0, 1]), device=device)
 
     if target_text:
+        import clip
         target_text = torch.cat([clip.tokenize(target_text)]).to(device)
 
     if initial_latent is not None:
